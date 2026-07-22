@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Android App Training AR/VR Simulator</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+</head>
+<body>
+<div id="hud"><b>Android App Training Simulator</b><div class="controls"><select id="lessonSelect"></select><select id="speedSelect"><option value="1">Beginner speed</option><option value="0.55">Fast speed</option></select><button id="playBtn">▶ Play</button><button id="pauseBtn">⏸ Pause</button><button id="replayBtn">↻ Replay</button><button id="prevBtn">← Previous</button><button id="nextBtn">Next →</button></div><div class="progress"><div id="progressFill"></div></div></div>
+<div id="lessonCard"><small id="lessonNumber"></small><h1 id="lessonTitle"></h1><p id="lessonGoal"></p><div id="microStep">Ready</div></div>
+<div id="monitor"><div class="topbar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span id="windowTitle">Training Desktop</span></div>
+<div id="desktopView" class="view active"><div class="desktop"><div class="icon">🛠️<span>Android Studio</span></div><div class="icon">⌨️<span>Terminal</span></div><div class="icon">🌐<span>Browser</span></div><div class="icon">📱<span>Phone</span></div></div></div>
+<div id="terminalView" class="view"><div class="terminal"><div id="terminalHistory"></div><span class="prompt">student@macbook % </span><span id="terminalTyping"></span><span class="caret">█</span></div></div>
+<div id="androidView" class="view"><div class="android"><div class="toolbar">Android Studio <span>File Edit View Navigate Code Build Run</span></div><div class="main"><pre id="projectTree"></pre><div class="editor"><div id="editorTab" class="tab">MainActivity.kt</div><pre id="codeEditor"></pre></div></div><pre id="buildPanel" class="build"></pre></div></div>
+<div id="phoneView" class="view"><div class="phone"><div class="speaker"></div><div class="phoneScreen"><div class="appIcon">A1</div><div id="phoneText">Android phone ready</div></div></div></div>
+<div id="toolView" class="view"><div id="toolGrid" class="toolgrid"></div></div>
+<div id="pointer"><span></span></div><div id="focusBox"></div><div id="caption">Press Play to begin.</div><div id="meaningBox"></div><div id="successBadge">Lesson completed ✓</div></div>
+<div id="sidePanel"><h2>What is happening?</h2><div id="explanation"></div><h3>Visible result</h3><div id="resultBox"></div></div>
+<a-scene embedded vr-mode-ui="enabled:true" renderer="antialias:true;colorManagement:true"><a-sky color="#0f172a"></a-sky><a-plane position="0 0 -4" rotation="-90 0 0" width="30" height="30" color="#1e293b"></a-plane><a-box position="0 1.2 -5" width="10" height="0.3" depth="4" color="#8b5e3c"></a-box><a-box position="0 3 -7" width="10" height="5.6" depth="0.2" color="#111827"></a-box><a-plane position="0 3 -6.88" width="9.3" height="4.9" color="#2563eb"></a-plane><a-box position="3.8 1.8 -4.2" width="1.1" height="2.2" depth="0.2" color="#111827"></a-box><a-plane position="3.8 1.8 -4.08" width="0.9" height="1.8" color="#0ea5e9"></a-plane><a-entity position="0 2.2 7"><a-camera></a-camera></a-entity><a-entity light="type:ambient;intensity:1"></a-entity><a-entity light="type:directional;intensity:.9" position="4 8 3"></a-entity></a-scene>
+<script src="js/lessons.js"></script><script src="js/engine.js"></script>
+</body></html>
