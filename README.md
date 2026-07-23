@@ -1,51 +1,40 @@
-# Android XR Training Academy — Iteration 1
+# Android XR Training Academy — Iteration 2
 
-Iteration 1 establishes the cinematic WebXR training environment.
+Iteration 2 adds a complete cinematic Android training sequence inside the XR laboratory.
 
 ## Included
 
-- Three.js 3D academy environment
-- Cinematic camera tour
-- Animated academy doors
-- Virtual XR instructor
-- Android development workstation
-- Holographic workflow display
+- Eight guided training modules
+- Complete Terminal commands
+- Character-by-character command typing
+- Enter-key animation
+- Realistic Terminal output
+- Android Studio project tree
+- AndroidManifest.xml code animation
+- Complete MainActivity.kt WebView code animation
+- Gradle APK build simulation
+- BUILD SUCCESSFUL animation
+- APK location command
+- ADB installation simulation
+- Virtual Android phone and app launch
 - Voice narration
 - Subtitles
+- Speed controls
 - Chapter navigation
-- Full-screen mode
-- WebXR / VR entry button
-- Responsive student interface
+- WebXR / VR entry
 
 ## Important
 
-This iteration builds the visual and cinematic foundation. It does not yet run Terminal commands.
+The commands are realistic scripted demonstrations. They do not yet execute on a real server.
 
-Iteration 2 will add:
+Iteration 3 will add an interactive practice mode where students type commands themselves, receive validation, make mistakes, and request hints.
 
-- a realistic virtual Terminal;
-- complete commands typed character by character;
-- Enter-key execution animation;
-- scrolling command output;
-- Android Studio file and code animations;
-- clearer step-by-step teaching narration.
+## Publish
 
-## Files
-
-```text
-index.html
-css/style.css
-js/main.js
-```
-
-## Publish to GitHub Pages
-
-Copy the contents of this folder into your GitHub Pages repository and run:
+Copy this folder into the GitHub Pages repository:
 
 ```bash
 git add .
-git commit -m "Add Android XR Training iteration 1"
+git commit -m "Add Android XR Training iteration 2"
 git push origin main
 ```
-
-Then open your GitHub Pages link and refresh with Command + Shift + R.
