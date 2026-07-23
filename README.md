@@ -1,40 +1,51 @@
-# Android Training Cinematic Lab — Version 3
+# Android XR Training Academy — Iteration 1
 
-This browser-based training package includes:
+Iteration 1 establishes the cinematic WebXR training environment.
 
-- Cinematic Watch Mode
-- Guided voice narration
-- Animated camera zooms
-- Automatic terminal typing
-- Android Studio code simulation
-- APK build and phone-install animation
-- Practice Mode
-- Quiz Mode
-- Full-screen presentation
-- Eight structured training lessons
+## Included
+
+- Three.js 3D academy environment
+- Cinematic camera tour
+- Animated academy doors
+- Virtual XR instructor
+- Android development workstation
+- Holographic workflow display
+- Voice narration
+- Subtitles
+- Chapter navigation
+- Full-screen mode
+- WebXR / VR entry button
+- Responsive student interface
+
+## Important
+
+This iteration builds the visual and cinematic foundation. It does not yet run Terminal commands.
+
+Iteration 2 will add:
+
+- a realistic virtual Terminal;
+- complete commands typed character by character;
+- Enter-key execution animation;
+- scrolling command output;
+- Android Studio file and code animations;
+- clearer step-by-step teaching narration.
 
 ## Files
 
 ```text
 index.html
 css/style.css
-js/lessons.js
-js/engine.js
-source-training.md
+js/main.js
 ```
 
-## Publish on GitHub Pages
+## Publish to GitHub Pages
 
-Copy these files into the root of your GitHub Pages repository, commit, and push.
+Copy the contents of this folder into your GitHub Pages repository and run:
 
 ```bash
 git add .
-git commit -m "Add cinematic training version 3"
+git commit -m "Add Android XR Training iteration 1"
 git push origin main
 ```
 
-Then open your GitHub Pages URL and refresh with Command + Shift + R.
-
-## Student access
-
-Students only need the GitHub Pages link. They do not need the source ZIP.
+Then open your GitHub Pages link and refresh with Command + Shift + R.

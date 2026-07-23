@@ -1,177 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Android Training Cinematic Lab</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020617" />
+  <title>Android XR Training Academy — Iteration 1</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div id="welcome">
-    <div class="welcome-card">
-      <div class="eyebrow">CINEMATIC TRAINING · VERSION 3</div>
-      <h1>Build an Android App from LiaScript</h1>
-      <p>Watch the complete workflow as an animated lesson, practise the same actions, and finish with a short quiz.</p>
-      <div class="mode-grid">
-        <button class="mode-card active" data-mode="watch"><b>🎬 Watch Mode</b><span>Automatic guided animation</span></button>
-        <button class="mode-card" data-mode="practice"><b>🧪 Practice Mode</b><span>Repeat each training step</span></button>
-        <button class="mode-card" data-mode="quiz"><b>📝 Quiz Mode</b><span>Check your understanding</span></button>
+  <div id="loading">
+    <div class="loader-ring"></div>
+    <h1>Android XR Training Academy</h1>
+    <p>Preparing the cinematic virtual lab…</p>
+  </div>
+
+  <div id="introOverlay">
+    <div class="intro-card">
+      <div class="eyebrow">ITERATION 1 · CINEMATIC WATCH MODE</div>
+      <h1>Enter the Android XR Training Academy</h1>
+      <p>
+        Begin with a guided cinematic introduction. The camera enters the academy,
+        meets the virtual instructor, and arrives at the Android development workstation.
+      </p>
+
+      <div class="feature-row">
+        <span>🎬 Cinematic camera</span>
+        <span>🤖 Virtual instructor</span>
+        <span>🖥️ Training workstation</span>
+        <span>🥽 WebXR foundation</span>
       </div>
-      <button id="startTraining">Start Training</button>
+
+      <div class="intro-actions">
+        <button id="startBtn" class="primary">Start Cinematic Tour</button>
+        <button id="skipBtn">Skip to Workstation</button>
+      </div>
     </div>
   </div>
 
   <header id="topbar">
-    <div>
-      <strong>Android Cinematic Training Lab</strong>
-      <small id="modeLabel">Watch Mode</small>
+    <div class="brand-block">
+      <strong>Android XR Training Academy</strong>
+      <small id="sceneLabel">Lobby entrance</small>
     </div>
+
     <div class="top-controls">
-      <select id="lessonSelect"></select>
-      <select id="speedSelect">
-        <option value="1.2">Slow</option>
-        <option value="1" selected>Normal</option>
-        <option value=".72">Fast</option>
-      </select>
-      <button id="playBtn">▶ Play</button>
+      <button id="tourBtn">▶ Tour</button>
       <button id="pauseBtn">⏸ Pause</button>
       <button id="replayBtn">↻ Replay</button>
       <button id="voiceBtn">🔊 Voice</button>
-      <button id="fullBtn">⛶ Full Screen</button>
+      <button id="fullscreenBtn">⛶ Full Screen</button>
+      <button id="vrBtn">🥽 Enter VR</button>
     </div>
-    <div class="progress"><div id="progressFill"></div></div>
+
+    <div class="progress-track"><div id="progressFill"></div></div>
   </header>
 
-  <main id="stage">
-    <section id="cinema">
-      <div id="sceneTitle">Welcome to the Virtual Android Lab</div>
-      <div id="cameraFrame" class="shot-wide">
-        <div class="lab-wall">
-          <div class="lab-title">ANDROID DEVELOPMENT LAB</div>
-          <div class="lab-subtitle">LiaScript → Android WebView → APK</div>
-          <div class="ambient orb1"></div>
-          <div class="ambient orb2"></div>
-        </div>
+  <main>
+    <div id="canvasWrap"></div>
 
-        <div id="desk">
-          <div id="monitor">
-            <div class="monitor-head"><span></span><span></span><span></span><b id="windowTitle">Training Desktop</b></div>
-            <div id="screen">
-              <div id="desktopView" class="view active">
-                <div class="desktop-icon" data-app="studio">🛠️<span>Android Studio</span></div>
-                <div class="desktop-icon" data-app="terminal">⌨️<span>Terminal</span></div>
-                <div class="desktop-icon" data-app="browser">🌐<span>Browser</span></div>
-                <div class="desktop-icon" data-app="phone">📱<span>Phone</span></div>
-              </div>
-
-              <div id="terminalView" class="view">
-                <div class="terminal-head">Terminal — zsh</div>
-                <div id="terminalHistory"></div>
-                <div><span class="prompt">student@macbook % </span><span id="terminalTyping"></span><span class="caret">█</span></div>
-              </div>
-
-              <div id="androidView" class="view">
-                <div class="studio-menu">Android Studio <span>File · Edit · View · Navigate · Code · Build · Run</span></div>
-                <div class="studio-body">
-                  <pre id="projectTree"></pre>
-                  <div class="editor">
-                    <div id="editorTab">MainActivity.kt</div>
-                    <pre id="codeEditor"></pre>
-                  </div>
-                </div>
-                <pre id="buildPanel"></pre>
-              </div>
-
-              <div id="browserView" class="view">
-                <div class="browser-bar">◀ ▶ ⟳ &nbsp; https://liascript.github.io/course/</div>
-                <div class="browser-page">
-                  <h2>LiaScript Course</h2>
-                  <p>Interactive learning content ready for Android WebView.</p>
-                  <div class="course-card">German A1 Training Course</div>
-                </div>
-              </div>
-
-              <div id="phoneView" class="view">
-                <div class="phone">
-                  <div class="speaker"></div>
-                  <div class="phone-screen">
-                    <div class="android-logo">🤖</div>
-                    <div id="phoneText">Android device ready</div>
-                    <div id="installBar"><span></span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="keyboard"></div>
-          <div id="phoneProp">📱</div>
-        </div>
-
-        <div id="instructor">
-          <div class="head">🤖</div>
-          <div class="body"></div>
-          <div class="arm"></div>
-          <div class="speech" id="speechBubble">Welcome. Press Play to begin.</div>
-        </div>
-
-        <div id="cursor">➤</div>
-        <div id="focusRing"></div>
-        <div id="successBurst">BUILD SUCCESSFUL ✓</div>
+    <section id="chapterRail">
+      <div class="rail-head">
+        <span>Cinematic chapters</span>
+        <b id="chapterCounter">1 / 5</b>
       </div>
 
-      <div id="timeline">
-        <button id="prevStep">←</button>
-        <div id="chapterName">Introduction</div>
-        <button id="nextStep">→</button>
-      </div>
-      <div id="subtitles">Press Play to start the cinematic lesson.</div>
+      <button class="chapter active" data-step="0">
+        <span>01</span>
+        <div><b>Academy entrance</b><small>Arrival and welcome</small></div>
+      </button>
+      <button class="chapter" data-step="1">
+        <span>02</span>
+        <div><b>Virtual instructor</b><small>Training introduction</small></div>
+      </button>
+      <button class="chapter" data-step="2">
+        <span>03</span>
+        <div><b>Development laboratory</b><small>Workstation reveal</small></div>
+      </button>
+      <button class="chapter" data-step="3">
+        <span>04</span>
+        <div><b>Android workflow</b><small>LiaScript to APK</small></div>
+      </button>
+      <button class="chapter" data-step="4">
+        <span>05</span>
+        <div><b>Ready for training</b><small>Next iteration preview</small></div>
+      </button>
     </section>
 
-    <aside id="trainingPanel">
-      <div class="panel-tabs">
-        <button class="tab active" data-tab="guide">Guide</button>
-        <button class="tab" data-tab="practice">Practice</button>
-        <button class="tab" data-tab="quiz">Quiz</button>
+    <section id="narrationPanel">
+      <div class="speaker-row">
+        <div class="avatar">🤖</div>
+        <div>
+          <small>XR Instructor</small>
+          <strong id="narrationTitle">Welcome to the Academy</strong>
+        </div>
       </div>
 
-      <section id="guideTab" class="tab-content active">
-        <div class="lesson-number" id="lessonNumber">LESSON 01</div>
-        <h2 id="lessonTitle">Training introduction</h2>
-        <p id="lessonGoal"></p>
-        <div class="status-card">
-          <span>Current action</span>
-          <strong id="currentAction">Ready</strong>
-        </div>
-        <div class="result-card">
-          <span>Expected result</span>
-          <p id="expectedResult">The animation will show each step clearly.</p>
-        </div>
-        <div id="chapterList"></div>
-      </section>
+      <p id="narrationText">
+        Press Start Cinematic Tour to enter the Android XR Training Academy.
+      </p>
 
-      <section id="practiceTab" class="tab-content">
-        <h2>Now it is your turn</h2>
-        <p id="practiceInstruction">Select Practice Mode and complete the highlighted action.</p>
-        <div id="practiceWorkspace">
-          <button id="practiceAction">Complete highlighted action</button>
-          <div id="practiceFeedback"></div>
-        </div>
-      </section>
+      <div class="instruction-card">
+        <span>Current focus</span>
+        <strong id="focusText">Academy entrance</strong>
+      </div>
 
-      <section id="quizTab" class="tab-content">
-        <h2>Knowledge Check</h2>
-        <div id="quizBox"></div>
-        <button id="submitQuiz">Check answer</button>
-        <div id="quizFeedback"></div>
-      </section>
-    </aside>
+      <div class="mini-status">
+        <div><span>Mode</span><b>Cinematic Watch</b></div>
+        <div><span>XR</span><b>Ready</b></div>
+        <div><span>Voice</span><b id="voiceStatus">On</b></div>
+      </div>
+    </section>
+
+    <div id="subtitle">Press Start Cinematic Tour to begin.</div>
+
+    <div id="hint">
+      Drag to look around · Scroll to zoom · Use chapter buttons to jump
+    </div>
   </main>
 
-  <div id="achievement">🏆 Lesson completed</div>
-
-  <script src="js/lessons.js"></script>
-  <script src="js/engine.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
