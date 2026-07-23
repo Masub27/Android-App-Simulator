@@ -1,22 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Android App Training AR/VR Simulator</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Android Training Cinematic Lab</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
 </head>
 <body>
-<div id="hud"><b>Android App Training Simulator</b><div class="controls"><select id="lessonSelect"></select><select id="speedSelect"><option value="1">Beginner speed</option><option value="0.55">Fast speed</option></select><button id="playBtn">▶ Play</button><button id="pauseBtn">⏸ Pause</button><button id="replayBtn">↻ Replay</button><button id="prevBtn">← Previous</button><button id="nextBtn">Next →</button></div><div class="progress"><div id="progressFill"></div></div></div>
-<div id="lessonCard"><small id="lessonNumber"></small><h1 id="lessonTitle"></h1><p id="lessonGoal"></p><div id="microStep">Ready</div></div>
-<div id="monitor"><div class="topbar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span id="windowTitle">Training Desktop</span></div>
-<div id="desktopView" class="view active"><div class="desktop"><div class="icon">🛠️<span>Android Studio</span></div><div class="icon">⌨️<span>Terminal</span></div><div class="icon">🌐<span>Browser</span></div><div class="icon">📱<span>Phone</span></div></div></div>
-<div id="terminalView" class="view"><div class="terminal"><div id="terminalHistory"></div><span class="prompt">student@macbook % </span><span id="terminalTyping"></span><span class="caret">█</span></div></div>
-<div id="androidView" class="view"><div class="android"><div class="toolbar">Android Studio <span>File Edit View Navigate Code Build Run</span></div><div class="main"><pre id="projectTree"></pre><div class="editor"><div id="editorTab" class="tab">MainActivity.kt</div><pre id="codeEditor"></pre></div></div><pre id="buildPanel" class="build"></pre></div></div>
-<div id="phoneView" class="view"><div class="phone"><div class="speaker"></div><div class="phoneScreen"><div class="appIcon">A1</div><div id="phoneText">Android phone ready</div></div></div></div>
-<div id="toolView" class="view"><div id="toolGrid" class="toolgrid"></div></div>
-<div id="pointer"><span></span></div><div id="focusBox"></div><div id="caption">Press Play to begin.</div><div id="meaningBox"></div><div id="successBadge">Lesson completed ✓</div></div>
-<div id="sidePanel"><h2>What is happening?</h2><div id="explanation"></div><h3>Visible result</h3><div id="resultBox"></div></div>
-<a-scene embedded vr-mode-ui="enabled:true" renderer="antialias:true;colorManagement:true"><a-sky color="#0f172a"></a-sky><a-plane position="0 0 -4" rotation="-90 0 0" width="30" height="30" color="#1e293b"></a-plane><a-box position="0 1.2 -5" width="10" height="0.3" depth="4" color="#8b5e3c"></a-box><a-box position="0 3 -7" width="10" height="5.6" depth="0.2" color="#111827"></a-box><a-plane position="0 3 -6.88" width="9.3" height="4.9" color="#2563eb"></a-plane><a-box position="3.8 1.8 -4.2" width="1.1" height="2.2" depth="0.2" color="#111827"></a-box><a-plane position="3.8 1.8 -4.08" width="0.9" height="1.8" color="#0ea5e9"></a-plane><a-entity position="0 2.2 7"><a-camera></a-camera></a-entity><a-entity light="type:ambient;intensity:1"></a-entity><a-entity light="type:directional;intensity:.9" position="4 8 3"></a-entity></a-scene>
-<script src="js/lessons.js"></script><script src="js/engine.js"></script>
-</body></html>
+  <div id="welcome">
+    <div class="welcome-card">
+      <div class="eyebrow">CINEMATIC TRAINING · VERSION 3</div>
+      <h1>Build an Android App from LiaScript</h1>
+      <p>Watch the complete workflow as an animated lesson, practise the same actions, and finish with a short quiz.</p>
+      <div class="mode-grid">
+        <button class="mode-card active" data-mode="watch"><b>🎬 Watch Mode</b><span>Automatic guided animation</span></button>
+        <button class="mode-card" data-mode="practice"><b>🧪 Practice Mode</b><span>Repeat each training step</span></button>
+        <button class="mode-card" data-mode="quiz"><b>📝 Quiz Mode</b><span>Check your understanding</span></button>
+      </div>
+      <button id="startTraining">Start Training</button>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <div>
+      <strong>Android Cinematic Training Lab</strong>
+      <small id="modeLabel">Watch Mode</small>
+    </div>
+    <div class="top-controls">
+      <select id="lessonSelect"></select>
+      <select id="speedSelect">
+        <option value="1.2">Slow</option>
+        <option value="1" selected>Normal</option>
+        <option value=".72">Fast</option>
+      </select>
+      <button id="playBtn">▶ Play</button>
+      <button id="pauseBtn">⏸ Pause</button>
+      <button id="replayBtn">↻ Replay</button>
+      <button id="voiceBtn">🔊 Voice</button>
+      <button id="fullBtn">⛶ Full Screen</button>
+    </div>
+    <div class="progress"><div id="progressFill"></div></div>
+  </header>
+
+  <main id="stage">
+    <section id="cinema">
+      <div id="sceneTitle">Welcome to the Virtual Android Lab</div>
+      <div id="cameraFrame" class="shot-wide">
+        <div class="lab-wall">
+          <div class="lab-title">ANDROID DEVELOPMENT LAB</div>
+          <div class="lab-subtitle">LiaScript → Android WebView → APK</div>
+          <div class="ambient orb1"></div>
+          <div class="ambient orb2"></div>
+        </div>
+
+        <div id="desk">
+          <div id="monitor">
+            <div class="monitor-head"><span></span><span></span><span></span><b id="windowTitle">Training Desktop</b></div>
+            <div id="screen">
+              <div id="desktopView" class="view active">
+                <div class="desktop-icon" data-app="studio">🛠️<span>Android Studio</span></div>
+                <div class="desktop-icon" data-app="terminal">⌨️<span>Terminal</span></div>
+                <div class="desktop-icon" data-app="browser">🌐<span>Browser</span></div>
+                <div class="desktop-icon" data-app="phone">📱<span>Phone</span></div>
+              </div>
+
+              <div id="terminalView" class="view">
+                <div class="terminal-head">Terminal — zsh</div>
+                <div id="terminalHistory"></div>
+                <div><span class="prompt">student@macbook % </span><span id="terminalTyping"></span><span class="caret">█</span></div>
+              </div>
+
+              <div id="androidView" class="view">
+                <div class="studio-menu">Android Studio <span>File · Edit · View · Navigate · Code · Build · Run</span></div>
+                <div class="studio-body">
+                  <pre id="projectTree"></pre>
+                  <div class="editor">
+                    <div id="editorTab">MainActivity.kt</div>
+                    <pre id="codeEditor"></pre>
+                  </div>
+                </div>
+                <pre id="buildPanel"></pre>
+              </div>
+
+              <div id="browserView" class="view">
+                <div class="browser-bar">◀ ▶ ⟳ &nbsp; https://liascript.github.io/course/</div>
+                <div class="browser-page">
+                  <h2>LiaScript Course</h2>
+                  <p>Interactive learning content ready for Android WebView.</p>
+                  <div class="course-card">German A1 Training Course</div>
+                </div>
+              </div>
+
+              <div id="phoneView" class="view">
+                <div class="phone">
+                  <div class="speaker"></div>
+                  <div class="phone-screen">
+                    <div class="android-logo">🤖</div>
+                    <div id="phoneText">Android device ready</div>
+                    <div id="installBar"><span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="keyboard"></div>
+          <div id="phoneProp">📱</div>
+        </div>
+
+        <div id="instructor">
+          <div class="head">🤖</div>
+          <div class="body"></div>
+          <div class="arm"></div>
+          <div class="speech" id="speechBubble">Welcome. Press Play to begin.</div>
+        </div>
+
+        <div id="cursor">➤</div>
+        <div id="focusRing"></div>
+        <div id="successBurst">BUILD SUCCESSFUL ✓</div>
+      </div>
+
+      <div id="timeline">
+        <button id="prevStep">←</button>
+        <div id="chapterName">Introduction</div>
+        <button id="nextStep">→</button>
+      </div>
+      <div id="subtitles">Press Play to start the cinematic lesson.</div>
+    </section>
+
+    <aside id="trainingPanel">
+      <div class="panel-tabs">
+        <button class="tab active" data-tab="guide">Guide</button>
+        <button class="tab" data-tab="practice">Practice</button>
+        <button class="tab" data-tab="quiz">Quiz</button>
+      </div>
+
+      <section id="guideTab" class="tab-content active">
+        <div class="lesson-number" id="lessonNumber">LESSON 01</div>
+        <h2 id="lessonTitle">Training introduction</h2>
+        <p id="lessonGoal"></p>
+        <div class="status-card">
+          <span>Current action</span>
+          <strong id="currentAction">Ready</strong>
+        </div>
+        <div class="result-card">
+          <span>Expected result</span>
+          <p id="expectedResult">The animation will show each step clearly.</p>
+        </div>
+        <div id="chapterList"></div>
+      </section>
+
+      <section id="practiceTab" class="tab-content">
+        <h2>Now it is your turn</h2>
+        <p id="practiceInstruction">Select Practice Mode and complete the highlighted action.</p>
+        <div id="practiceWorkspace">
+          <button id="practiceAction">Complete highlighted action</button>
+          <div id="practiceFeedback"></div>
+        </div>
+      </section>
+
+      <section id="quizTab" class="tab-content">
+        <h2>Knowledge Check</h2>
+        <div id="quizBox"></div>
+        <button id="submitQuiz">Check answer</button>
+        <div id="quizFeedback"></div>
+      </section>
+    </aside>
+  </main>
+
+  <div id="achievement">🏆 Lesson completed</div>
+
+  <script src="js/lessons.js"></script>
+  <script src="js/engine.js"></script>
+</body>
+</html>

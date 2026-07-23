@@ -1,25 +1,40 @@
-# Android App Training AR/VR Simulator
+# Android Training Cinematic Lab — Version 3
 
-A browser-based scripted visual training simulator built from the supplied LiaScript-to-Android WebView training. It contains 14 beginner lessons and uses HTML, CSS, JavaScript and A-Frame. No screen recording is used.
+This browser-based training package includes:
 
-## Run locally
+- Cinematic Watch Mode
+- Guided voice narration
+- Animated camera zooms
+- Automatic terminal typing
+- Android Studio code simulation
+- APK build and phone-install animation
+- Practice Mode
+- Quiz Mode
+- Full-screen presentation
+- Eight structured training lessons
 
-```bash
-python3 -m http.server 8000
-```
-
-Open `http://localhost:8000/android-training-arvr/` from `/mnt/data`, or serve this folder directly.
-
-## GitHub Pages
-
-Upload the folder contents to a repository root, enable Pages from `main` and `/ (root)`, then open:
+## Files
 
 ```text
-https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/?step=1
+index.html
+css/style.css
+js/lessons.js
+js/engine.js
+source-training.md
 ```
 
-## LiaScript link
+## Publish on GitHub Pages
 
-```markdown
-[▶ Watch AR/VR demonstration](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/?step=8)
+Copy these files into the root of your GitHub Pages repository, commit, and push.
+
+```bash
+git add .
+git commit -m "Add cinematic training version 3"
+git push origin main
 ```
+
+Then open your GitHub Pages URL and refresh with Command + Shift + R.
+
+## Student access
+
+Students only need the GitHub Pages link. They do not need the source ZIP.

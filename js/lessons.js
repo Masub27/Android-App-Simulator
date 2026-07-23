@@ -1,16 +1,139 @@
-window.LESSONS=[
-{id:1,title:'Required tools',goal:'Recognize the software and hardware required for the project.',actions:[['view','tool'],['tools',[['🛠️','Android Studio'],['📦','Android SDK'],['☕','Java/JDK'],['⚙️','Gradle'],['K','Kotlin'],['🌐','GitHub Pages'],['📱','Android phone'],['🔌','USB cable']]],['caption','These tools are needed before you begin.'],['explain','Android Studio is the development environment. The SDK builds the app. Java 17 and Kotlin compile it. GitHub Pages hosts the LiaScript course.'],['result','All required tools are identified.']]},
-{id:2,title:'Create Android Studio project',goal:'Create an Empty Activity project with the correct settings.',actions:[['view','desktop'],['caption','Open Android Studio.'],['pointer','12%','24%'],['click'],['view','android'],['tree','New Project\n  → Empty Activity / Empty Views Activity'],['code','New Project','Project name: A1.1 German Part 1\nPackage name: io.github.masubmakhdoom.a1part1modern\nLanguage: Kotlin\nMinimum SDK: 23'],['meaning','Minimum SDK 23 means Android 6.0 or newer.'],['result','The Kotlin Android project is created.']]},
-{id:3,title:'Open project in Terminal',goal:'Use cd to enter the Android project folder.',actions:[['view','desktop'],['caption','Open Terminal.'],['pointer','29%','24%'],['click'],['view','terminal'],['type','cd "/Users/masubmakhdoom/AndroidStudioProjects/A11GermanPart1"'],['enter','Current directory changed to A11GermanPart1'],['meaning','cd means change directory.'],['result','Terminal is now inside the project folder.']]},
-{id:4,title:'Project-level Gradle',goal:'Place plugin versions in build.gradle.kts.',actions:[['view','android'],['tree','A11GermanPart1\n├── app\n├── build.gradle.kts  ← project level\n└── settings.gradle.kts'],['code','build.gradle.kts','plugins {\n    id("com.android.application") version "8.7.3" apply false\n    id("org.jetbrains.kotlin.android") version "2.0.21" apply false\n}'],['meaning','Do not put android { ... } in this file.'],['result','Plugin versions are configured.']]},
-{id:5,title:'App-level Gradle',goal:'Configure SDK values and Java 17.',actions:[['view','android'],['tree','A11GermanPart1\n└── app\n    └── build.gradle.kts  ← app level'],['code','app/build.gradle.kts','android {\n    namespace = "io.github.masubmakhdoom.a1part1modern"\n    compileSdk = 35\n    defaultConfig {\n        minSdk = 23\n        targetSdk = 35\n        versionCode = 1\n        versionName = "1.0"\n    }\n    compileOptions {\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17\n    }\n}\nkotlin { jvmToolchain(17) }'],['meaning','compileSdk builds the app; targetSdk declares the target; minSdk sets the oldest supported version.'],['result','The app module uses SDK 35 and Java 17.']]},
-{id:6,title:'Fix JVM mismatch',goal:'Make Java and Kotlin use compatible versions.',actions:[['view','android'],['build','ERROR: Inconsistent JVM-target compatibility\nJava = 1.8\nKotlin = 21'],['caption','The Java and Kotlin targets do not match.'],['code','app/build.gradle.kts','compileOptions {\n  sourceCompatibility = JavaVersion.VERSION_17\n  targetCompatibility = JavaVersion.VERSION_17\n}\nkotlin { jvmToolchain(17) }'],['build','✓ Java target = 17\n✓ Kotlin target = 17\nBUILD CONFIGURATION VALID'],['result','Both compilers now use Java 17.']]},
-{id:7,title:'Create themes',goal:'Create normal and night-mode theme files.',actions:[['view','android'],['tree','app/src/main/res\n├── values/themes.xml\n└── values-night/themes.xml'],['code','values/themes.xml','<resources>\n  <style name="Theme.A11GermanPart1" parent="@android:style/Theme.Material.Light.NoActionBar">\n    <item name="android:windowNoTitle">true</item>\n    <item name="android:statusBarColor">#FFFFFF</item>\n  </style>\n</resources>'],['meaning','values is normal mode; values-night is dark mode.'],['result','Light and dark themes are available.']]},
-{id:8,title:'AndroidManifest.xml',goal:'Add internet permission, app name and launcher activity.',actions:[['view','android'],['tree','app/src/main\n└── AndroidManifest.xml'],['code','AndroidManifest.xml','<manifest xmlns:android="http://schemas.android.com/apk/res/android">\n  <uses-permission android:name="android.permission.INTERNET" />\n  <application android:theme="@style/Theme.A11GermanPart1" android:label="A1 German Modern Online">\n    <activity android:name=".MainActivity" android:exported="true">\n      <intent-filter>\n        <action android:name="android.intent.action.MAIN" />\n        <category android:name="android.intent.category.LAUNCHER" />\n      </intent-filter>\n    </activity>\n  </application>\n</manifest>'],['meaning','INTERNET permission is required for the online LiaScript course.'],['result','Android knows the app name, permission and first activity.']]},
-{id:9,title:'MainActivity WebView',goal:'Load the LiaScript course inside Android WebView.',actions:[['view','android'],['tree','app/src/main/java/io/github/masubmakhdoom/a1part1modern\n└── MainActivity.kt'],['code','MainActivity.kt','webView = WebView(this)\nsetContentView(webView)\nwebView.webViewClient = WebViewClient()\nwebView.webChromeClient = WebChromeClient()\nval settings = webView.settings\nsettings.javaScriptEnabled = true\nsettings.domStorageEnabled = true\nsettings.databaseEnabled = true\nsettings.mediaPlaybackRequiresUserGesture = false\nwebView.loadUrl("https://masub27.github.io/a1-iphone-part1/")'],['meaning','JavaScript and DOM storage are needed by LiaScript.'],['result','The app opens the online LiaScript course.']]},
-{id:10,title:'Build the APK',goal:'Clean and build a debug APK.',actions:[['view','terminal'],['type','./gradlew clean'],['enter','BUILD SUCCESSFUL'],['type','./gradlew assembleDebug'],['enter','Compiling Kotlin...\nProcessing resources...\nPackaging APK...\nBUILD SUCCESSFUL'],['meaning','assembleDebug creates an installable test APK.'],['result','app-debug.apk has been created.']]},
-{id:11,title:'Copy APK to Desktop',goal:'Move the APK to an easy-to-find location.',actions:[['view','terminal'],['type','cp app/build/outputs/apk/debug/app-debug.apk "/Users/masubmakhdoom/Desktop/A1_German_Modern_Online.apk"'],['enter','APK copied successfully'],['view','desktop'],['caption','The APK now appears on the Desktop.'],['result','The APK is ready for transfer.']]},
-{id:12,title:'Install on phone',goal:'Transfer and install the APK.',actions:[['view','phone'],['phone','Receiving A1_German_Modern_Online.apk...'],['wait',1200],['phone','Install this application?\n\n[ Cancel ]   [ Install ]'],['wait',1200],['phone','Installing...\n██████████ 100%'],['wait',1200],['phone','A1 German Modern Online\n\nApp installed successfully'],['result','The app is installed.']]},
-{id:13,title:'Test the app',goal:'Check all important app functions.',actions:[['view','phone'],['phone','Testing checklist\n\n✓ App opens\n✓ Course loads\n✓ No white screen\n✓ Audio works\n✓ Video works\n✓ Links open\n✓ Quizzes work\n✓ Back button works\n✓ Screen is clear\n✓ Internet available'],['result','All main functions have been checked.']]},
-{id:14,title:'Common errors',goal:'Recognize and fix the documented problems.',actions:[['view','android'],['build','ERROR 1: android { ... } in wrong file\nFix: Move it to app/build.gradle.kts.'],['wait',1500],['build','ERROR 2: MaterialComponents theme not found\nFix: Use a built-in Android theme.'],['wait',1500],['build','ERROR 3: JVM target mismatch\nFix: Set Java and Kotlin to 17.'],['wait',1500],['build','ERROR 4: White WebView screen\nFix: Use the GitHub Pages online URL.'],['result','The learner can diagnose the main errors.']]}
+const LESSONS = [
+  {
+    id: 1,
+    title: "Training introduction",
+    goal: "Understand the complete LiaScript-to-Android workflow.",
+    result: "You know what will be created and which stages are involved.",
+    quiz: {
+      question: "What is the final output of this training?",
+      options: ["A PowerPoint file", "An Android APK", "A PDF document"],
+      correct: 1
+    },
+    shots: [
+      {type:"camera", shot:"wide", caption:"Welcome to the Android Development Virtual Lab.", action:"Enter the training laboratory."},
+      {type:"speak", text:"In this training, you will convert a LiaScript course into an Android application."},
+      {type:"camera", shot:"monitor", caption:"The complete workflow has four stages: prepare, configure, build, and test.", action:"Review the workflow."},
+      {type:"show", view:"browser", caption:"First, we begin with the LiaScript course.", action:"Open the LiaScript course."},
+      {type:"show", view:"phone", caption:"At the end, the course runs as an Android app.", action:"Preview the final Android app."}
+    ]
+  },
+  {
+    id: 2,
+    title: "Required tools",
+    goal: "Identify the software needed before development starts.",
+    result: "Android Studio, Java 17, a browser, and a LiaScript course are ready.",
+    quiz: {
+      question: "Which Java version is used in this training?",
+      options: ["Java 8", "Java 11", "Java 17"],
+      correct: 2
+    },
+    shots: [
+      {type:"show", view:"desktop", caption:"Before starting, prepare all required tools.", action:"Review the desktop tools."},
+      {type:"cursor", target:"studio", caption:"Android Studio is used to create and build the Android project.", action:"Identify Android Studio."},
+      {type:"cursor", target:"terminal", caption:"Terminal is used to run project and build commands.", action:"Identify Terminal."},
+      {type:"cursor", target:"browser", caption:"A browser is used to test the LiaScript course.", action:"Identify the browser."},
+      {type:"speak", text:"Use Java 17 for a modern and compatible Android build environment."}
+    ]
+  },
+  {
+    id: 3,
+    title: "Create the Android project",
+    goal: "Create an empty Android Studio project.",
+    result: "A new Android project is available with a MainActivity file.",
+    quiz: {
+      question: "Which project template should beginners select?",
+      options: ["Empty Activity", "Game Activity", "Maps Activity"],
+      correct: 0
+    },
+    shots: [
+      {type:"show", view:"desktop", caption:"Open Android Studio.", action:"Open Android Studio."},
+      {type:"cursor", target:"studio", caption:"The cursor opens Android Studio.", action:"Select Android Studio."},
+      {type:"show", view:"android", caption:"Choose New Project and select Empty Activity.", action:"Create a new Empty Activity project."},
+      {type:"tree", text:"app/\n ├─ manifests/\n ├─ kotlin/\n │   └─ MainActivity.kt\n └─ res/", caption:"Android Studio creates the basic project structure.", action:"Inspect the project structure."}
+    ]
+  },
+  {
+    id: 4,
+    title: "Configure Java and Gradle",
+    goal: "Prepare the project for Java 17 and WebView.",
+    result: "Gradle configuration is ready for compilation.",
+    quiz: {
+      question: "Why is Gradle important?",
+      options: ["It controls the Android build", "It edits photos", "It creates email accounts"],
+      correct: 0
+    },
+    shots: [
+      {type:"show", view:"android", caption:"Open the module Gradle file.", action:"Open the Gradle configuration."},
+      {type:"code", tab:"build.gradle.kts", text:"android {\n  compileSdk = 35\n\n  compileOptions {\n    sourceCompatibility = JavaVersion.VERSION_17\n    targetCompatibility = JavaVersion.VERSION_17\n  }\n}", caption:"Set source and target compatibility to Java 17.", action:"Configure Java 17."},
+      {type:"speak", text:"After changing Gradle, synchronize the project so Android Studio applies the configuration."},
+      {type:"build", text:"> Task :app:prepareKotlinBuildScriptModel\nGradle sync finished successfully", caption:"Gradle synchronization completes.", action:"Sync the project."}
+    ]
+  },
+  {
+    id: 5,
+    title: "Add Internet permission",
+    goal: "Allow the application to load LiaScript web content.",
+    result: "The Android app has Internet permission.",
+    quiz: {
+      question: "Where is Internet permission declared?",
+      options: ["AndroidManifest.xml", "README.md", "settings.gradle"],
+      correct: 0
+    },
+    shots: [
+      {type:"show", view:"android", caption:"Open AndroidManifest.xml.", action:"Open AndroidManifest.xml."},
+      {type:"code", tab:"AndroidManifest.xml", text:'<manifest xmlns:android="http://schemas.android.com/apk/res/android">\n\n  <uses-permission android:name="android.permission.INTERNET" />\n\n  <application ...>\n  </application>\n</manifest>', caption:"Add Internet permission above the application element.", action:"Add Internet permission."},
+      {type:"highlight", caption:"This permission allows WebView to access the online LiaScript course.", action:"Verify the permission."}
+    ]
+  },
+  {
+    id: 6,
+    title: "Create the WebView activity",
+    goal: "Load the LiaScript course inside the Android application.",
+    result: "MainActivity displays the course in a WebView.",
+    quiz: {
+      question: "Which Android component displays web content?",
+      options: ["TextView", "WebView", "ImageButton"],
+      correct: 1
+    },
+    shots: [
+      {type:"show", view:"android", caption:"Open MainActivity.kt.", action:"Open MainActivity.kt."},
+      {type:"code", tab:"MainActivity.kt", text:'class MainActivity : AppCompatActivity() {\n  override fun onCreate(savedInstanceState: Bundle?) {\n    super.onCreate(savedInstanceState)\n\n    val webView = WebView(this)\n    webView.settings.javaScriptEnabled = true\n    webView.webViewClient = WebViewClient()\n    webView.loadUrl("https://liascript.github.io/course/?YOUR_COURSE_URL")\n    setContentView(webView)\n  }\n}', caption:"Create a WebView, enable JavaScript, and load the LiaScript URL.", action:"Add WebView code."},
+      {type:"highlight", caption:"Replace YOUR_COURSE_URL with the raw GitHub link to your LiaScript Markdown file.", action:"Insert the course URL."}
+    ]
+  },
+  {
+    id: 7,
+    title: "Build the APK",
+    goal: "Compile the Android project into an installable APK.",
+    result: "A debug APK is generated successfully.",
+    quiz: {
+      question: "Which message confirms a successful build?",
+      options: ["BUILD SUCCESSFUL", "Permission denied", "File not found"],
+      correct: 0
+    },
+    shots: [
+      {type:"show", view:"terminal", caption:"Open Terminal in the Android project folder.", action:"Open Terminal."},
+      {type:"type", command:"./gradlew assembleDebug", output:"> Task :app:compileDebugKotlin\n> Task :app:packageDebug", caption:"Run the Gradle debug build command.", action:"Build the debug APK."},
+      {type:"build", text:"BUILD SUCCESSFUL in 18s\n34 actionable tasks: 34 executed", caption:"The project builds successfully.", action:"Confirm the build."},
+      {type:"success", caption:"The APK is available in app/build/outputs/apk/debug/.", action:"Locate the APK."}
+    ]
+  },
+  {
+    id: 8,
+    title: "Install and test",
+    goal: "Install the APK and verify that the course works.",
+    result: "The LiaScript Android app opens correctly on the phone.",
+    quiz: {
+      question: "What should you test after installation?",
+      options: ["Only the app icon", "Navigation, audio, links, and layout", "Nothing"],
+      correct: 1
+    },
+    shots: [
+      {type:"show", view:"phone", caption:"Connect an Android phone or start an emulator.", action:"Prepare the Android device."},
+      {type:"install", caption:"The APK is transferred and installed.", action:"Install the APK."},
+      {type:"phone", text:"LiaScript course loading…", caption:"Open the application.", action:"Launch the app."},
+      {type:"phone", text:"German A1 Training\nLesson 1 · Introduction", caption:"The LiaScript course is now running inside Android.", action:"Test the course."},
+      {type:"success", caption:"Training complete. The Android application works successfully.", action:"Complete the training."}
+    ]
+  }
 ];
