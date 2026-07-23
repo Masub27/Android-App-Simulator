@@ -1,40 +1,62 @@
-# Android XR Training Academy — Iteration 2
+# Android XR Training Academy — Iteration 3
 
-Iteration 2 adds a complete cinematic Android training sequence inside the XR laboratory.
+Iteration 3 is a major visual and instructional upgrade.
 
-## Included
+## New in Iteration 3
 
-- Eight guided training modules
-- Complete Terminal commands
-- Character-by-character command typing
-- Enter-key animation
-- Realistic Terminal output
-- Android Studio project tree
-- AndroidManifest.xml code animation
-- Complete MainActivity.kt WebView code animation
-- Gradle APK build simulation
-- BUILD SUCCESSFUL animation
-- APK location command
-- ADB installation simulation
-- Virtual Android phone and app launch
-- Voice narration
-- Subtitles
-- Speed controls
-- Chapter navigation
-- WebXR / VR entry
+- Walking virtual instructor
+- Dual-monitor 3D workstation
+- Animated 3D keyboard
+- Animated 3D mouse
+- Cinematic camera presets
+- Android Studio menus and file navigation
+- Project tree highlighting
+- Code-line highlighting
+- Terminal command animation
+- Build menu animation
+- LiaScript browser preview
+- APK build and ADB installation sequence
+- Ten immersive modules
+- Checkpoint progress
+- Guided practice panel
+- Answer checking and hints
+- Full-screen and WebXR support
+- Voice narration and subtitles
+
+## Modules
+
+1. Laboratory orientation
+2. Open the development tools
+3. Verify the environment
+4. Inspect the Android project
+5. Configure AndroidManifest
+6. Build the WebView activity
+7. Review the LiaScript course
+8. Build the APK
+9. Install on Android
+10. Test and complete training
 
 ## Important
 
-The commands are realistic scripted demonstrations. They do not yet execute on a real server.
+This remains a scripted browser simulation. Real shell execution will be introduced only when a secure backend or cloud container is connected.
 
-Iteration 3 will add an interactive practice mode where students type commands themselves, receive validation, make mistakes, and request hints.
+## GitHub Pages publishing
 
-## Publish
+Copy these files into the repository root:
 
-Copy this folder into the GitHub Pages repository:
+```text
+index.html
+css/style.css
+js/main.js
+README.md
+assets/
+docs/
+```
+
+Then:
 
 ```bash
 git add .
-git commit -m "Add Android XR Training iteration 2"
+git commit -m "Add Android XR Training iteration 3"
 git push origin main
 ```
